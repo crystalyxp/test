@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Compiler/Compiler.iml" filepath="$PROJECT_DIR$/Compiler/Compiler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/FinitStateMachine/FinitStateMachine.iml" filepath="$PROJECT_DIR$/FinitStateMachine/FinitStateMachine.iml" />
+      <module fileurl="file://$PROJECT_DIR$/InputSystem/InputSystem.iml" filepath="$PROJECT_DIR$/InputSystem/InputSystem.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ThompsonConstruction/ThompsonConstruction.iml" filepath="$PROJECT_DIR$/ThompsonConstruction/ThompsonConstruction.iml" />
+    </modules>
+  </component>
+</project>
