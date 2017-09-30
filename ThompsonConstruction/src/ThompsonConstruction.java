@@ -8,6 +8,10 @@ public class ThompsonConstruction {
     private NfaMachineConstructor nfaMachineConstructor = null;
     private NfaPrinter nfaPrinter = new NfaPrinter();
     
+    NfaPair pair = new NfaPair();
+    
+    NfaIntepretor nfaIntepretor = null;
+    
     public void runMacroExample() throws Exception {
     	System.out.println("Please enter macro definition");
     	
@@ -134,10 +138,15 @@ public class ThompsonConstruction {
     	System.out.println(s);
     }
     
+    public void runNfaIntepretorExample() {
+    	nfaIntepretor = new NfaIntepretor(pair.startNode, input);
+    	nfaIntepretor.intepretNfa();
+    }
+ 
     private void runNfaMachineConstructorExample() throws Exception {
     	lexer = new Lexer(regularExpr);
     	nfaMachineConstructor = new NfaMachineConstructor(lexer);
-    	NfaPair pair = new NfaPair();
+
     	//nfaMachineConstructor.constructNfaForSingleCharacter(pair);
     	//nfaMachineConstructor.constructNfaForDot(pair);
     	//nfaMachineConstructor.constructNfaForCharacterSetWithoutNegative(pair);
@@ -150,7 +159,11 @@ public class ThompsonConstruction {
     	//nfaMachineConstructor.cat_expr(pair);
     	nfaMachineConstructor.expr(pair);
     	nfaPrinter.printNfa(pair.startNode);
+    	
+    	
     }
+    
+   
     
     
     public static void main(String[] args) throws Exception {
@@ -160,5 +173,7 @@ public class ThompsonConstruction {
     	construction.runLexerExample();
     	
     	construction.runNfaMachineConstructorExample();
+    	
+    	construction.runNfaIntepretorExample();
     }
 }

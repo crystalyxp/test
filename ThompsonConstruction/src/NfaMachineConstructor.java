@@ -39,6 +39,7 @@ public class NfaMachineConstructor {
     		 localPair.endNode.next = endNode;
     		 pairOut.endNode = endNode;
     	 }
+    	 
     }
     
    
@@ -54,6 +55,8 @@ public class NfaMachineConstructor {
     		factor(pairOut);
     	}
     	
+    	char c = (char)lexer.getLexeme();
+    	
     	while (first_in_cat(lexer.getCurrentToken()) ){
     		NfaPair pairLocal = new NfaPair();
     		factor(pairLocal);
@@ -62,6 +65,8 @@ public class NfaMachineConstructor {
     		
     		pairOut.endNode = pairLocal.endNode;
     	}
+    	
+    	
     }
     
     private boolean first_in_cat(Lexer.Token tok) throws Exception {
@@ -92,6 +97,8 @@ public class NfaMachineConstructor {
     }
     
     public void factor(NfaPair pairOut) throws Exception {
+    	term(pairOut);
+    	
     	boolean handled = false;
     	handled = constructStarClosure(pairOut);
     	if (handled == false) {
@@ -110,7 +117,7 @@ public class NfaMachineConstructor {
     	 * term*
     	 */
     	Nfa start, end;
-    	term(pairOut);
+    //	term(pairOut);
     	
     	if (lexer.MatchToken(Lexer.Token.CLOSURE) == false) {
     		return false;
@@ -138,7 +145,7 @@ public class NfaMachineConstructor {
     	 * term+
     	 */
     	Nfa start, end;
-    	term(pairOut);
+    //	term(pairOut);
     	
     	if (lexer.MatchToken(Lexer.Token.PLUS_CLOSE) == false) {
     		return false;
@@ -164,7 +171,7 @@ public class NfaMachineConstructor {
     	 * term?
     	 */
     	Nfa start, end;
-    	term(pairOut);
+  //  	term(pairOut);
     	
     	if (lexer.MatchToken(Lexer.Token.OPTIONAL) == false) {
     		return false;
@@ -204,6 +211,8 @@ public class NfaMachineConstructor {
     	if (handled == false) {
     		constructNfaForCharacterSet(pairOut);
     	}
+    	
+    	
     }
     
     private boolean constructExprInParen(NfaPair pairOut) throws Exception {
