@@ -1,6 +1,4 @@
 import java.util.Set;
-
-
 public class NfaMachineConstructor {
 	private Lexer lexer;
 	private NfaManager nfaManager = null;
@@ -14,6 +12,85 @@ public class NfaMachineConstructor {
     	}
     }
     
+    public void expr(NfaPair pairOut) throws Exception {
+    	/*
+    	 * expr 由一个或多个cat_expr 之间进行 OR 形成
+    	 * 如果表达式只有一个cat_expr 那么expr 就等价于cat_expr
+    	 * 如果表达式由多个cat_expr做或连接构成那么 expr-> cat_expr | cat_expr | ....
+    	 * 由此得到expr的语法描述为:
+    	 * expr -> expr OR cat_expr
+    	 *         | cat_expr 
+    	 *
+    	 */
+    	 cat_expr(pairOut);
+    	 NfaPair localPair = new NfaPair();
+    	
+    	 while (lexer.MatchToken(Lexer.Token.OR)) {
+    		 lexer.advance();
+    		 cat_expr(localPair);
+    		 
+    		 Nfa startNode = nfaManager.newNfa();
+    		 startNode.next2 = localPair.startNode;
+    		 startNode.next = pairOut.startNode;
+    		 pairOut.startNode = startNode;
+    		 
+    		 Nfa endNode = nfaManager.newNfa();
+    		 pairOut.endNode.next = endNode;
+    		 localPair.endNode.next = endNode;
+    		 pairOut.endNode = endNode;
+    	 }
+    }
+    
+   
+    public void cat_expr(NfaPair pairOut) throws Exception
+    {
+    	/*
+    	 * cat_expr -> factor factor .....
+    	 * 由于多个factor 前后结合就是一个cat_expr所以
+    	 * cat_expr-> factor cat_expr
+    	 */
+
+    	if (first_in_cat(lexer.getCurrentToken())) {
+    		factor(pairOut);
+    	}
+    	
+    	while (first_in_cat(lexer.getCurrentToken()) ){
+    		NfaPair pairLocal = new NfaPair();
+    		factor(pairLocal);
+    		
+    		pairOut.endNode.next = pairLocal.startNode;
+    		
+    		pairOut.endNode = pairLocal.endNode;
+    	}
+    }
+    
+    private boolean first_in_cat(Lexer.Token tok) throws Exception {
+    	switch (tok) {
+    	//正确的表达式不会以 ) $ 开头,如果遇到EOS表示正则表达式解析完毕，那么就不应该执行该函数
+    	case CLOSE_PAREN:
+    	case AT_EOL:
+    	case OR:
+    	case EOS:
+    		return false;
+    	case CLOSURE:
+    	case PLUS_CLOSE:
+    	case OPTIONAL:
+    		//*, +, ? 这几个符号应该放在表达式的末尾
+    		ErrorHandler.parseErr(ErrorHandler.Error.E_CLOSE);
+    		return false;
+    	case CCL_END:
+    		//表达式不应该以]开头
+    		ErrorHandler.parseErr(ErrorHandler.Error.E_BRACKET);
+    		return false;
+    	case AT_BOL:
+    		//^必须在表达式的最开始
+    		ErrorHandler.parseErr(ErrorHandler.Error.E_BOL);
+    		return false;
+    	}
+    	
+    	return true;
+    }
+    
     public void factor(NfaPair pairOut) throws Exception {
     	boolean handled = false;
     	handled = constructStarClosure(pairOut);
@@ -25,8 +102,8 @@ public class NfaMachineConstructor {
     		handled = constructOptionsClosure(pairOut);
     	}
     	
-    	
     }
+    
     
     public boolean constructStarClosure(NfaPair pairOut) throws Exception {
     	/*
@@ -43,13 +120,15 @@ public class NfaMachineConstructor {
     	end = nfaManager.newNfa();
     	
     	start.next = pairOut.startNode;
-    	pairOut.endNode.next = end;
+    	pairOut.endNode.next = pairOut.startNode;
     	
     	start.next2 = end;
-    	pairOut.endNode.next2 = start;
+    	pairOut.endNode.next2 = end;
     	
     	pairOut.startNode = start;
     	pairOut.endNode = end;
+    	
+    	lexer.advance();
     	
     	return true;
     }
@@ -69,14 +148,14 @@ public class NfaMachineConstructor {
     	end = nfaManager.newNfa();
     	
     	start.next = pairOut.startNode;
-    	pairOut.endNode.next = end;
+    	pairOut.endNode.next2 = end;
+    	pairOut.endNode.next = pairOut.startNode;
     	
-    	
-    	pairOut.endNode.next2 = start;
     	
     	pairOut.startNode = start;
     	pairOut.endNode = end;
     	
+    	lexer.advance();
     	return true;
     }
     
@@ -102,16 +181,22 @@ public class NfaMachineConstructor {
     	pairOut.startNode = start;
     	pairOut.endNode = end;
     	
+    	lexer.advance();
+    	
     	return true;
     }
     
     public void term(NfaPair pairOut)throws Exception {
         /*
-         * term ->  character | [...] | [^...]
+         * term ->  character | [...] | [^...] | [character-charcter] | . | (expr)
          * 
          */
     	
-    	boolean handled = constructNfaForSingleCharacter(pairOut);
+    	boolean handled = constructExprInParen(pairOut);
+    	if (handled == false) {
+    		handled = constructNfaForSingleCharacter(pairOut);
+    	}
+    			
     	if (handled == false) {
     		handled = constructNfaForDot(pairOut);
     	}
@@ -121,7 +206,22 @@ public class NfaMachineConstructor {
     	}
     }
     
-
+    private boolean constructExprInParen(NfaPair pairOut) throws Exception {
+    	if (lexer.MatchToken(Lexer.Token.OPEN_PAREN)) {
+    		lexer.advance();
+    		expr(pairOut);
+    		if (lexer.MatchToken(Lexer.Token.CLOSE_PAREN)) {
+    			lexer.advance();
+    		}
+    		else {
+    			ErrorHandler.parseErr(ErrorHandler.Error.E_PAREN);
+    		}
+    		
+    		return true;
+    	}
+    	
+    	return false;
+    }
     
     public boolean constructNfaForSingleCharacter(NfaPair pairOut) throws Exception {
     	if (lexer.MatchToken(Lexer.Token.L) == false) {

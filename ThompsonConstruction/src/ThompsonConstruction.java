@@ -141,13 +141,14 @@ public class ThompsonConstruction {
     	//nfaMachineConstructor.constructNfaForSingleCharacter(pair);
     	//nfaMachineConstructor.constructNfaForDot(pair);
     	//nfaMachineConstructor.constructNfaForCharacterSetWithoutNegative(pair);
-    	nfaMachineConstructor.constructNfaForCharacterSet(pair);
+    	//nfaMachineConstructor.constructNfaForCharacterSet(pair);
     	//nfaMachineConstructor.term(pair);
     	//nfaMachineConstructor.constructStarClosure(pair);
     	//nfaMachineConstructor.constructPlusClosure(pair);
     	//nfaMachineConstructor.constructOptionsClosure(pair);
     	//nfaMachineConstructor.factor(pair);
-    	
+    	//nfaMachineConstructor.cat_expr(pair);
+    	nfaMachineConstructor.expr(pair);
     	nfaPrinter.printNfa(pair.startNode);
     }
     
