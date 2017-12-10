@@ -8,18 +8,22 @@ public class NfaIntepretor {
 	private Nfa start;
 	private Input input;
 	
+	public boolean debug = true;
+	
     public NfaIntepretor(Nfa start, Input input) {
         this.start = start;
         this.input = input;
     }
     
     
-    private Set<Nfa> e_closure(Set<Nfa> input) {
+    public Set<Nfa> e_closure(Set<Nfa> input) {
     	/*
     	 * 计算input集合中nfa节点所对应的ε闭包，
     	 * 并将闭包的节点加入到input中
     	 */
-    	System.out.print("ε-Closure( " + strFromNfaSet(input) + " ) = ");
+    	if (debug)
+    	    System.out.print("ε-Closure( " + strFromNfaSet(input) + " ) = ");
+    	
     	
     	Stack<Nfa> nfaStack = new Stack<Nfa>();
     	if (input == null || input.isEmpty()) {
@@ -36,6 +40,8 @@ public class NfaIntepretor {
     		
     		if (p.next != null && p.getEdge() == Nfa.EPSILON) {
     			if (input.contains(p.next) == false)  {
+    				Nfa next = p.next;
+    				
     				nfaStack.push(p.next);
     				input.add(p.next);
     			}
@@ -43,13 +49,15 @@ public class NfaIntepretor {
     		
     		if (p.next2 != null && p.getEdge() == Nfa.EPSILON) {
     			if (input.contains(p.next2) == false) {
+    				Nfa next = p.next2;
+    				
     				nfaStack.push(p.next2);
     				input.add(p.next2);
     			}
     		}
     	}
     	
-    	if (input != null) {
+    	if (input != null && debug) {
     		System.out.println("{ " + strFromNfaSet(input) + " }");
     	}
     	
@@ -70,7 +78,7 @@ public class NfaIntepretor {
     	return s;
     }
     
-    private Set<Nfa> move(Set<Nfa> input, char c) {
+    public Set<Nfa> move(Set<Nfa> input, char c) {
     	Set<Nfa> outSet = new HashSet<Nfa>();
     	Iterator it = input.iterator();
     	
@@ -85,11 +93,13 @@ public class NfaIntepretor {
     		
     		
     		if (p.getEdge() == c || (p.getEdge() == Nfa.CCL && p.inputSet.contains(cb))) {
+    			Nfa next = p.next;
+    			
     			outSet.add(p.next);
     		}
     	}
     	
-    	if (outSet != null) {
+    	if (outSet != null && debug) {
     		System.out.print("move({ " + strFromNfaSet(input) + " }, '" + c + "')= ");
         	System.out.println("{ " + strFromNfaSet(outSet) + " }");
     	}
@@ -107,7 +117,7 @@ public class NfaIntepretor {
     	
     	Set<Nfa> next = new HashSet<Nfa>();
     	next.add(start);
-    	e_closure(next);
+    	next = e_closure(next);
     	
     	Set<Nfa> current = null; 
     	char c;
