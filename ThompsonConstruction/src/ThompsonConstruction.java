@@ -14,6 +14,8 @@ public class ThompsonConstruction {
     
     DfaConstructor  dfaConstructor = null;
     
+    MinimizeDFA    miniDfa = null;
+    
     public void runMacroExample() throws Exception {
     	System.out.println("Please enter macro definition");
     	
@@ -172,6 +174,11 @@ public class ThompsonConstruction {
     	
     }
     
+    private void runMinimizeDFAExample() {
+    	miniDfa = new MinimizeDFA(dfaConstructor);
+    	miniDfa.minimize();
+    }
+    
    
     
     
@@ -186,5 +193,7 @@ public class ThompsonConstruction {
     	construction.runNfaIntepretorExample();
     	
     	construction.runDfaConstructorExample();
+    	
+    	construction.runMinimizeDFAExample();
     }
 }

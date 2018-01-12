@@ -101,6 +101,14 @@ public class DfaConstructor {
     	return dfaStateTransformTable;
     }
     
+    public ArrayList<Dfa>  getDfaList() {
+    	return dfaList;
+    }
+    
+    public int[][] getDfaTransTable() {
+    	return dfaStateTransformTable;
+    }
+    
     
     private Dfa isNfaStatesExistInDfa(Set<Nfa> closure) {
     	

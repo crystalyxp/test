@@ -4,6 +4,7 @@ import java.util.Iterator;
 
 
 public class Dfa {
+	
 	private static int STATE_NUM = 0;
 	
 	int   stateNum = 0;
