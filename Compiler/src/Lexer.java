@@ -9,7 +9,8 @@ public class Lexer {
     public static final int  LP = 4;
     public static final int  RP = 5;
     public static final int  NUM_OR_ID = 6;
-    public static final int  UNKNOWN_SYMBOL = 7;
+    public static final int  WHITE_SPACE = 7;
+    public static final int  UNKNOWN_SYMBOL = 8;
     
     private int lookAhead = -1;
     
@@ -21,8 +22,8 @@ public class Lexer {
     private String current = "";
     
     private boolean isAlnum(char c) {
-    	if (Character.isAlphabetic(c) ||
-				Character.isDigit(c)) {
+    	if (Character.isAlphabetic(c) == true ||
+    		    Character.isDigit(c) == true) {
     		return true;
     	}
     	
@@ -57,11 +58,11 @@ public class Lexer {
     		if (current.isEmpty()) {
     			return EOI;
     		}
-    		    
+
     		    for (int i = 0; i < current.length(); i++) {
     		    	
     		    	yyleng = 0;
-    		    	yytext = current.substring(0, 1);
+    		    	yytext = current.substring(i, i + 1);
     		    	switch (current.charAt(i)) {
     		    	case ';': current = current.substring(1); return SEMI;
     		    	case '+': current = current.substring(1); return PLUS;
@@ -71,7 +72,10 @@ public class Lexer {
     		    	
     		    	case '\n':
     		    	case '\t':
-    		    	case ' ': current = current.substring(1); break;
+    		    	case ' ': 
+    		            current = current.substring(1);
+    		            return WHITE_SPACE;
+
     		    	
     		    	default:
     		    		if (isAlnum(current.charAt(i)) == false) {
@@ -108,8 +112,10 @@ public class Lexer {
     }
     
     public void runLexer() {
-    	while (!match(EOI)) {
-    		System.out.println("Token: " + token() + " ,Symbol: " + yytext );
+    	while (!match(EOI) ) {
+    		if (match(WHITE_SPACE) != true) {
+    		    System.out.println("Token: " + token() + " ,Symbol: " + yytext );
+    		}
     		advance();
     	}
     }

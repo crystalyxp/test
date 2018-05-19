@@ -18,7 +18,7 @@ public class Parser {
 	}
 	
 	private void freeNames(String s) {
-		if (nameP > 0) {
+		if (nameP >= 0) {
 			names[nameP] = s;
 			nameP--;
 		}
@@ -33,11 +33,10 @@ public class Parser {
     
     public void statements() {
     	String tempvar = newName();
-    	expression(tempvar); 
     	
-    	while (lexer.match(Lexer.EOI) != false) {
+    	do {
+    		
     		expression (tempvar);
-    		freeNames(tempvar);
     		
     		if (lexer.match(Lexer.SEMI)) {
     			lexer.advance();
@@ -45,7 +44,10 @@ public class Parser {
     		else {
     			System.out.println("Inserting missing semicolon: " + lexer.yylineno);
     		}
-    	}
+    		
+    	}while (lexer.match(Lexer.EOI) != true);
+    	
+    	freeNames(tempvar);
     }
     
     private void expression(String tempVar) {
@@ -93,7 +95,7 @@ public class Parser {
     			System.out.println("Missmatched parenthesis: " + lexer.yylineno);
     		}
     	}
-    	else {
+    	else if (lexer.match(Lexer.WHITE_SPACE) != true){
     		System.out.println("Number or identifier expected: " + lexer.yylineno);
     	}
     }
