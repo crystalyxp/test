@@ -19,6 +19,7 @@ public class PdaParser {
     
     private Lexer lexer;
     private Stack<Grammar> pdaStack = new Stack<Grammar>();
+  
     
     public  PdaParser(Lexer lexer) {
     	this.lexer = lexer;
@@ -86,7 +87,7 @@ public class PdaParser {
     			pdaStack.pop();
     			if (lexer.match(Lexer.NUM_OR_ID) == false) {
     				parseError();
-    			}
+    			}		
     			lexer.advance();
     			break;
     		case PLUS:
