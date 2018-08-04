@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fa9bd940-dd08-496f-9518-f5344140b6a9" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/pushdownDFA.zip" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Compiler/src/AttributedPDAParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/Compiler/src/AttributedPDAParser.java" afterDir="false" />
     </list>
     <ignored path="编译原理.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -68,7 +68,7 @@
       <file leaf-file-name="Compiler.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Compiler/src/Compiler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="389">
+            <state relative-caret-position="513">
               <caret line="27" column="17" selection-start-line="27" selection-start-column="17" selection-end-line="27" selection-end-column="17" />
             </state>
           </provider>
@@ -77,14 +77,8 @@
       <file leaf-file-name="AttributedPDAParser.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Compiler/src/AttributedPDAParser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="338">
-              <caret line="120" lean-forward="true" selection-start-line="120" selection-end-line="120" />
-              <folding>
-                <element signature="e#615#624#0" expanded="true" />
-                <element signature="e#679#690#0" expanded="true" />
-                <element signature="e#847#848#0" expanded="true" />
-                <element signature="e#886#887#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="646">
+              <caret line="195" column="24" selection-start-line="195" selection-start-column="24" selection-end-line="195" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -105,8 +99,8 @@
       <file leaf-file-name="Lexer.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Compiler/src/Lexer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1140">
-              <caret line="60" selection-start-line="60" selection-end-line="60" />
+            <state relative-caret-position="152">
+              <caret line="8" column="29" selection-start-line="8" selection-start-column="29" selection-end-line="8" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -191,7 +185,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="26" />
     <option name="y" value="439" />
     <option name="width" value="1936" />
@@ -225,6 +219,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -241,8 +237,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="AndroidView" />
     </panes>
   </component>
@@ -544,7 +538,10 @@
       <workItem from="1529827070642" duration="4721000" />
       <workItem from="1530430282530" duration="50000" />
       <workItem from="1531999202633" duration="651000" />
-      <workItem from="1532070866030" duration="1821000" />
+      <workItem from="1532070866030" duration="5432000" />
+      <workItem from="1532087794953" duration="3665000" />
+      <workItem from="1532143531160" duration="2210000" />
+      <workItem from="1532607556520" duration="11000" />
     </task>
     <task id="LOCAL-00001" summary="123">
       <created>1511505677830</created>
@@ -598,7 +595,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="140090000" />
+    <option name="totallyTimeSpent" value="149587000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
@@ -606,7 +603,6 @@
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Messages" order="7" weight="0.32901832" />
       <window_info id="Palette&#9;" order="2" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
@@ -618,14 +614,15 @@
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.19721329" />
       <window_info id="Capture Tool" order="2" />
       <window_info anchor="right" id="Designer" order="3" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.34541577" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.35660982" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
       <window_info anchor="right" id="Theme Preview" order="4" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.403452" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.37756202" />
       <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.32901832" />
       <window_info anchor="bottom" id="Thumbnails" order="8" weight="0.32901832" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3883495" />
@@ -930,13 +927,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Compiler/src/Lexer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1140">
-          <caret line="60" selection-start-line="60" selection-end-line="60" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Compiler/src/ArgumentedParser.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2717">
@@ -1004,21 +994,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Compiler/src/Compiler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="389">
+        <state relative-caret-position="513">
           <caret line="27" column="17" selection-start-line="27" selection-start-column="17" selection-end-line="27" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Compiler/src/Lexer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="8" column="29" selection-start-line="8" selection-start-column="29" selection-end-line="8" selection-end-column="29" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Compiler/src/AttributedPDAParser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
-          <caret line="120" lean-forward="true" selection-start-line="120" selection-end-line="120" />
-          <folding>
-            <element signature="e#615#624#0" expanded="true" />
-            <element signature="e#679#690#0" expanded="true" />
-            <element signature="e#847#848#0" expanded="true" />
-            <element signature="e#886#887#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="646">
+          <caret line="195" column="24" selection-start-line="195" selection-start-column="24" selection-end-line="195" selection-end-column="24" />
         </state>
       </provider>
     </entry>

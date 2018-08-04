@@ -24,7 +24,7 @@ public class Compiler {
 		parser.statements();
 		*/
 		
-		AttributedPDAParser parser = new AttributedPDAParser(lexer);
+		TopdownPaserWithParseTable parser = new TopdownPaserWithParseTable(lexer);
 		parser.parse();
 	}
 }
