@@ -1,3 +1,5 @@
+import java.util.HashMap;
+
 
 public class SymbolDefine {
 	public static final int EXPR = 257;
@@ -23,4 +25,36 @@ public class SymbolDefine {
 	public static final int EOI = 0;
 	public static final int  WHITE_SPACE = 7;
 	public static final int  UNKNOWN_SYMBOL = 8;
+	
+	
+	public static String getSymbolStr(int symbol) {
+		switch (symbol) {
+		case EXPR:
+			return "EXPR";
+		case EXPR_PRIME:
+			return "EXPR_PRIME";
+		case FACTOR:
+			return "FACTOR";
+		case STMT:
+			return "STMT";
+		case TERM:
+			return "TERM";
+		case TERM_PRIME:
+			return "TERM_PRIME";
+		case LP:
+			return "LEFT_PARENT";
+		case NUM_OR_ID:
+			return "NUM_OR_ID";
+		case PLUS:
+			return "PLUS";
+		case RP:
+			return "RIGHT_PARENT";
+		case SEMI:
+			return "SEMI";
+		case TIMES:
+			return "TIMES";
+			default:
+				return "UNKNOWN SYMBOL";
+		}
+	}
 }

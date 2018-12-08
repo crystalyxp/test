@@ -23,8 +23,13 @@ public class Compiler {
 		AttributedParser parser = new AttributedParser(lexer);
 		parser.statements();
 		*/
-		
+		/*
 		TopdownPaserWithParseTable parser = new TopdownPaserWithParseTable(lexer);
 		parser.parse();
+		*/
+		
+		ParseTableBuilder tableBuilder = new ParseTableBuilder();
+		tableBuilder.runFollowSets();
+		
 	}
 }
